@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>TiePHP示例：Hello,TiePHP</title>
+        <link rel='stylesheet' type='text/css' href='__PUBLIC__/Css/common.css'>
+    </head>
+    <body>
+        <div class="main">
+            <h2>TiePHP示例之Hello,TiePHP</h2>
+            最简单的示例。
+            <table  cellpadding=3 cellspacing=3>
+                <tr>
+                    <td><div class="result"><?php echo $data['hello'];?></div></td>
+                </tr>
+                <tr>
+                    <td><div class="sorce"><?php echo $data['sorce'];?></div></td>
+                </tr>
+                <tr>
+                    <td><hr> 示例源码<br/>控制器IndexController类<br/><?php highlight_file(APP_PATH.'Controller/IndexController.php');?>
+                </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

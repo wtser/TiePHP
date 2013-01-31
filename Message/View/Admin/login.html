@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+    <?php include_js('html5.js'); ?>
+    <meta charset="utf-8"/>
+    <title>学院留言板</title>
+    <?php include_css('cssreset.css'); ?>
+   	<?php include_css('common.css'); ?>
+   	<?php include_css('leaveMessage.css'); ?>
+   	<?php include_css('admin.css'); ?>
+
+
+</head>
+<body>
+
+
+<script>//alert('请先登录')</script>
+<form id='loginForm' method='post' action="<?php echo APP_URL.'index.php/admin/loginCheck/'?>" ><input id='name' name='name' type='text' placeholder='用户名' /> <input id='pass' name='pass' type='password' placeholder='密码' /> <input id='loginSubmit' type='submit' value='登陆' />  </form>
+</body>
+</html>

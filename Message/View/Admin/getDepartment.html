@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+    <?php include_js('html5.js'); ?>
+    <meta charset="utf-8">
+    <title>学院留言板</title>
+     <?php include_css('cssreset.css'); ?>
+   	<?php include_css('common.css'); ?>
+   	<?php include_css('leaveMessage.css'); ?>
+   	<?php include_css('admin.css'); ?>
+
+</head>
+<body>
+
+
+<?php include_once("./View/Common/header.html"); ?>
+
+
+
+
+
+<div id="main">
+
+<?php 
+$str="";
+foreach($data['message']['replyerResult'] as $key=>$value){
+	$replyer=$value['replyer'];
+	if(URL_P3==$replyer){
+	$str.="<option value='$replyer' selected >" . $replyer . "</option>";
+	}else{
+	$str.="<option value='$replyer' >" . $replyer . "</option>";}
+}
+?>
+<select style="top: -54px;position: absolute;width: 100px;" id="replyer" name="replyer" onchange="javascript:window.location='<?php echo APP_URL;?>index.php/admin/getDepartment/'+ this.options[this.selectedIndex].value;">
+        <option value="">所有部门</option>';
+        
+		<?php
+		
+		 echo $str;
+
+echo ' </select>';
+?>
+<?php
+
+foreach( $data['message']['result'] as $key=>$row){
+	
+	 echo '
+		  	<div class="leaveMessageBox"  >
+			<label>' . $row['nickName'] . ' 对 ' . $row['replyer'] . '说</label>
+			
+			<p class="content" >' . $row['content'] . '</p>
+			<p class="content">留言时间：' . $row['createTime'] . ' IP地址：' . $row['ipAddress'] . ' <a msgId=' . $row['id'] . ' class="reply" href="javascript:;"> [回复]</a> | <a class="del" msgId="' . $row['id'] . '" replyer="' . @$_GET['replyer'] . '" href="javascript:;">[删除此留言]</a></p>
+			<p class="content"> 姓名：' . $row['realName'] . ' 学号：' . $row['stuNum'] . ' 电话：' . $row['phone'] . '</p>
+			
+
+			<form style="display:none;" id="replyForm' . $row['id'] . '" method="post" action="'.APP_URL.'index.php/admin/reply/'. $row['id'] . ' ">
+			<label>回复内容：</label>
+			
+			<textarea id="content' . $row['id'] . '" class="inputContent" type="text" name="reply" ></textarea>
+			<br />
+			<input class="messageSubmit" type="submit" value="提交" />
+
+			</form>
+			
+		</div>
+	';
+
+    
+}
+
+?>
+    
+ 
+
+   
+
+    <?php
+    
+    /*
+    while ($row = mysql_fetch_array($result)) {
+        //echo $row['FirstName'] . " " . $row['LastName'];
+        echo '
+		  	<div class="leaveMessageBox"  >
+			<label>' . $row['nickName'] . ' 对 ' . $row['replyer'] . '说</label>
+			
+			<p class="content" >' . $row['content'] . '</p>
+			<p class="content">留言时间：' . $row['createTime'] . ' IP地址：' . $row['ipAddress'] . ' <a msgId=' . $row['id'] . ' class="reply" href="javascript:;"> [回复]</a> | <a class="del" msgId="' . $row['id'] . '" replyer="' . @$_GET['replyer'] . '" href="javascript:;">[删除此留言]</a></p>
+			<p class="content"> 姓名：' . $row['realName'] . ' 学号：' . $row['stuNum'] . ' 电话：' . $row['phone'] . '</p>
+			
+
+			<form style="display:none;" id="replyForm' . $row['id'] . '" method="post" action="'.APP_URL.'index.php/admin/reply/'. $row['id'] . ' ">
+			<label>回复内容：</label>
+			
+			<textarea id="content' . $row['id'] . '" class="inputContent" type="text" name="reply" ></textarea>
+			<br />
+			<input class="messageSubmit" type="submit" value="提交" />
+
+			</form>
+			
+		</div>
+	';
+
+    }
+
+   */
+    ?>
+
+
+</div>
+<?php include_once("./View/Common/footer.html"); ?>
+<?php include_js('jquery.js'); ?>
+
+
+<script type="text/javascript">
+    $(function () {
+    	pageUrl=""; 
+    	pageUrl = window.location;
+    	pageUrl = pageUrl.toString() ;
+    	n=pageUrl.indexOf('index.php');
+    	pageUrl=pageUrl.substring(0, n);
+    	
+        $(".del").click(function () {
+
+            if (confirm("确定删除？此操作不可恢复！")) {
+                var msgId = $(this).attr("msgId");
+                var url = pageUrl+"index.php/admin/delMsg/" + msgId;
+               
+                location.href = url;
+            }
+        })
+
+        $(".reply").click(function () {
+            var msgId = $(this).attr("msgId");
+            var element = "#replyForm" + msgId;
+            //alert(element)
+            $(element).show();
+            var content = "#content" + msgId;
+            $(content).focus();
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+
+#main .messageBox{
+		border-top: 2px solid #ddd;
+		border-bottom: 2px solid #ddd;
+		padding-bottom: 20px;
+		padding-top: 20px;
+	}
+	#main .guest,#main .replyer{
+		width: 240px;
+		text-align: center;
+		font-size: 3em;
+		float: left;
+		
+	}
+	#main .message,#main .reply{
+		width: 504px;
+		float: left;
+		font-size: 1.4em;
+		background-color: #6491AF;
+		text-align: justify;
+	
+		color:white;
+		padding:8px;
+		position: relative;
+		line-height: 1.6em;
+	}
+	#main .replyer{
+		margin-top:20px;
+	}
+	#main .reply{
+		margin-top:20px;
+		background-color: #A06E6E;
+	}
+	
+	/*page*/
+		
+	s {
+		position: absolute;
+		
+		display: block;
+		height: 0;
+		width: 0;
+		font-size: 0;
+		line-height: 0;
+		
+		border-style: dashed dashed solid dashed;
+		border-width: 10px;
+		}
+		.msg{
+			top: 20px;
+			left: -20px;
+			border-color: transparent #6491AF  transparent transparent;
+		}
+		.rpy{
+			top: 20px;
+			left: 520px;
+			border-color: transparent transparent transparent #A06E6E;
+		}
+
+		.time{
+			text-align: right;
+		}
+        #scrollTop{
+            position: fixed;
+            top:90%;
+            right:20px;
+        }

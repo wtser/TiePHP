@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+
+	<?php include_js('html5.js'); ?>
+    <meta charset="utf-8"/>
+    <title>学院留言板</title>
+    <?php include_css('cssreset.css'); ?>
+   	<?php include_css('common.css'); ?>
+   	<?php include_css('leaveMessage.css'); ?>
+	
+   
+</head>
+<body>
+
+<?php include_once("./View/Common/header.html"); ?>
+<div id="main">
+    <form id="leaveMsg" class="leaveMessageBox" method="post" action="<?php echo APP_URL.'index.php/leaveMsg/submit/' ;?>">
+        <label><span>*</span>您的昵称：</label>
+        <input id="nickName" type="text" name="nickName" value="匿名"/>
+        <label><span>*</span>留言对象：</label>
+        <select id="replyer" name="replyer">
+        <?php 
+     	
+        	foreach($data['department'] as $value){
+				echo "<option value='$value'>$value</option>";}
+
+        ?>
+			
+           
+        </select>
+
+        <label><span>*</span>留言内容：</label>
+        <textarea id="content" type="text" name="content"></textarea>
+        <label>为方便与您联系，请填写下列信息（选填、保密）<a id="detail" href="javascript:;">[展开]</a></label>
+        <div id="otherInfo">
+            <label>真实姓名:</label>
+            <input id="realName" type="text" name="realName"/>
+            <label>学号:</label>
+            <input id="stuNum" type="number" name="stuNum"/>
+            <label>手机:</label>
+            <input id="phone" type="number" name="phone"/>
+        </div>
+        <input id="messageSubmit" type="button" value="提交"/> <span id="notice" style="color:red;font-size:2em;"></span>
+    </form>
+
+
+</div>
+<?php include_once("./View/Common/footer.html"); ?>
+<?php include_js('jquery.js'); ?>
+<script type="text/javascript">
+    $(function () {
+        $("#messageSubmit").click(function () {
+            if (!$("#content").attr("value")) {
+                $("#notice").text('提示：留言内容为空，请填写');
+
+            }
+            else {
+                $("#leaveMsg").submit();
+
+            }
+        })
+
+        $("#detail").click(function () {
+            $("#otherInfo").toggle();
+        })
+    })
+</script>
+</body>
+</html>
